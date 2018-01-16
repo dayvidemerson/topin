@@ -129,8 +129,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '_public/static')
 
 STATICFILES_DIRS = [
-    ('css', os.path.join(BASE_DIR, 'templates/static/css')),
-    ('js', os.path.join(BASE_DIR, 'templates/static/js')),
-    ('images', os.path.join(BASE_DIR, 'templates/static/images')),
-    ('fonts', os.path.join(BASE_DIR, 'templates/static/fonts'))
+    # ('css', os.path.join(BASE_DIR, 'templates/static/css')),
+    # ('js', os.path.join(BASE_DIR, 'templates/static/js')),
+    # ('images', os.path.join(BASE_DIR, 'templates/static/images')),
+    # ('fonts', os.path.join(BASE_DIR, 'templates/static/fonts'))
 ]
