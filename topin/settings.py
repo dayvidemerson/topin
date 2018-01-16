@@ -103,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # django-authtools
+# https://github.com/fusionbox/django-authtools
 
 AUTH_USER_MODEL = 'authtools.User'
 
@@ -134,3 +135,10 @@ STATICFILES_DIRS = [
     # ('images', os.path.join(BASE_DIR, 'templates/static/images')),
     # ('fonts', os.path.join(BASE_DIR, 'templates/static/fonts'))
 ]
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+MIDDLEWARE.insert(0, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
