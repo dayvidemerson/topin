@@ -4,9 +4,9 @@ from .models import Marker, Line, PointLine, Schedule, Route
 
 
 class MarkerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'city']
-    search_fields = ['name', 'city__name']
-    list_filter = ['city', 'user']
+    list_display = ['type', 'latitude', 'longitude', 'city']
+    search_fields = ['city__name']
+    list_filter = ['type', 'city', 'user']
 
 
 class ScheduleInline(admin.TabularInline):

@@ -18,12 +18,11 @@ class Point(models.Model):
 
 class Marker(Timestamp, Point):
     TYPES = (
-        ('bus_stop', _('parada de ônibus')),
-        ('ticket_store', _('ponto de venda de passagens'))
+        ('bus_stop', _('Parada de ônibus')),
+        ('ticket_store', _('Ponto de venda de passagens'))
     )
-    name = models.CharField(_('nome'), max_length=255, null=True, blank=True)
+    type = models.CharField(_('tipo'), max_length=50, choices=TYPES)
     description = models.TextField(_('descrição'), null=True, blank=True)
-
     city = models.ForeignKey(City, verbose_name=_('cidade'), on_delete=models.CASCADE)
     user = models.ForeignKey(User, verbose_name=_('administrador'), on_delete=models.CASCADE)
 
@@ -31,6 +30,9 @@ class Marker(Timestamp, Point):
         verbose_name = _('marcador')
         verbose_name_plural = _('marcadores')
         ordering = ['city']
+
+    def __str__(self):
+        return '({}, {})'.format(self.latitude, self.longitude)
 
 
 class Line(Timestamp):
