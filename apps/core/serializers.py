@@ -12,7 +12,7 @@ class StateSerializer(serializers.ModelSerializer):
 
 class CitySerializer(serializers.ModelSerializer):
 
-    state = serializers.SlugRelatedField(slug_field='slug')
+    state = serializers.SlugRelatedField(slug_field='slug', read_only=True)
 
     class Meta:
         model = City
