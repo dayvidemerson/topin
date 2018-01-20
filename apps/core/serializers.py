@@ -7,13 +7,13 @@ class StateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = State
-        exclude = ['created_at', 'updated_at']
+        exclude = ['id', 'created_at', 'updated_at']
 
 
 class CitySerializer(serializers.ModelSerializer):
 
-    state = serializers.SlugRelatedField(slug_field='slug', read_only=True)
+    state = serializers.SlugRelatedField(slug_field='slug')
 
     class Meta:
         model = City
-        exclude = ['created_at', 'updated_at']
+        exclude = ['id', 'created_at', 'updated_at']
