@@ -7,6 +7,7 @@ class MarkerAdmin(admin.ModelAdmin):
     list_display = ['type', 'latitude', 'longitude', 'city']
     search_fields = ['city__name']
     list_filter = ['type', 'city', 'user']
+    prepopulated_fields = {'slug': ['name']}
 
 
 class ScheduleInline(admin.TabularInline):
