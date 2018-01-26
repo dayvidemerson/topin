@@ -1,0 +1,9 @@
+[{
+    "name": "Pantanal -> Centro",
+    "slug": "pantanal-centro",
+    "description": "Pantanal -> Pedrinhas -> Centro"
+}, {
+    "name": "Centro -> Pantanal",
+    "slug": "centro-pantanal",
+    "description": "Centro -> Exposição -> Pantanal"
+}]
