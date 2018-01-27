@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Marker, Line, Route
+from .models import Marker, PointLine, Line, Route
 
 
 class MarkerSerializer(serializers.ModelSerializer):
@@ -12,11 +12,20 @@ class MarkerSerializer(serializers.ModelSerializer):
         exclude = ['user', 'created_at', 'updated_at']
 
 
+class PointLineSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PointLine
+        exclude = ['line', 'created_at', 'updated_at']
+
+
 class LineSerializer(serializers.ModelSerializer):
+
+    points = PointLineSerializer(source='pointline_set', many=True, read_only=True)
 
     class Meta:
         model = Line
-        exclude = ['user', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'slug', 'description', 'points']
 
 
 class RouteSerializer(serializers.ModelSerializer):
