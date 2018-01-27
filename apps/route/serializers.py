@@ -22,10 +22,11 @@ class PointLineSerializer(serializers.ModelSerializer):
 class LineSerializer(serializers.ModelSerializer):
 
     points = PointLineSerializer(source='pointline_set', many=True, read_only=True)
+    markers = MarkerSerializer(many=True)
 
     class Meta:
         model = Line
-        fields = ['id', 'name', 'slug', 'description', 'points']
+        fields = ['id', 'name', 'slug', 'description', 'markers', 'points']
 
 
 class RouteSerializer(serializers.ModelSerializer):

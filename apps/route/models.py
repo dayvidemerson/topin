@@ -43,6 +43,7 @@ class Line(Timestamp):
     description = models.TextField(_('descrição'))
 
     user = models.ForeignKey(User, verbose_name=_('administrador'), on_delete=models.CASCADE)
+    markers = models.ManyToManyField(Marker, verbose_name=_('marcadores'), blank=True)
 
     class Meta:
         verbose_name = _('linha')
