@@ -9,8 +9,10 @@ User = get_user_model()
 
 
 class Point(models.Model):
-    longitude = models.DecimalField(_('longitude'), max_digits=11, decimal_places=8)
-    latitude = models.DecimalField(_('latitude'), max_digits=11, decimal_places=8)
+    longitude = models.DecimalField(
+        _('longitude'), max_digits=11, decimal_places=8)
+    latitude = models.DecimalField(
+        _('latitude'), max_digits=11, decimal_places=8)
 
     class Meta:
         abstract = True
@@ -25,8 +27,10 @@ class Marker(Timestamp, Point):
     slug = models.SlugField(_('identificador'), unique=True)
     type = models.CharField(_('tipo'), max_length=50, choices=TYPES)
     description = models.TextField(_('descrição'), null=True, blank=True)
-    city = models.ForeignKey(City, verbose_name=_('cidade'), on_delete=models.CASCADE, db_index=True)
-    user = models.ForeignKey(User, verbose_name=_('administrador'), on_delete=models.CASCADE)
+    city = models.ForeignKey(City, verbose_name=_(
+        'cidade'), on_delete=models.CASCADE, db_index=True)
+    user = models.ForeignKey(User, verbose_name=_(
+        'administrador'), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('marcador')
@@ -42,8 +46,12 @@ class Line(Timestamp):
     slug = models.SlugField(_('identificador'), unique=True)
     description = models.TextField(_('descrição'))
 
-    user = models.ForeignKey(User, verbose_name=_('administrador'), on_delete=models.CASCADE)
-    markers = models.ManyToManyField(Marker, verbose_name=_('marcadores'), blank=True)
+    city = models.ForeignKey(City, verbose_name=_(
+        'cidade'), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_(
+        'administrador'), on_delete=models.CASCADE)
+    markers = models.ManyToManyField(
+        Marker, verbose_name=_('marcadores'), blank=True)
 
     class Meta:
         verbose_name = _('linha')
@@ -56,7 +64,8 @@ class Line(Timestamp):
 class PointLine(Timestamp, Point):
     order = models.PositiveSmallIntegerField(_('ordem'))
 
-    line = models.ForeignKey(Line, verbose_name=_('linha'), on_delete=models.CASCADE, db_index=True)
+    line = models.ForeignKey(Line, verbose_name=_(
+        'linha'), on_delete=models.CASCADE, db_index=True)
 
     class Meta:
         verbose_name = _('ponto')
@@ -83,7 +92,8 @@ class Schedule(Timestamp):
     )
     hour = models.TimeField(_('hora'))
 
-    line = models.ForeignKey(Line, verbose_name=_('linha'), on_delete=models.CASCADE, db_index=True)
+    line = models.ForeignKey(Line, verbose_name=_(
+        'linha'), on_delete=models.CASCADE, db_index=True)
 
     class Meta:
         verbose_name = _('horário')
@@ -98,10 +108,14 @@ class Route(Timestamp):
     name = models.CharField(_('nome'), max_length=255)
     slug = models.SlugField(_('identificador'), unique=True)
 
-    front = models.ForeignKey(Line, verbose_name=_('ida'), related_name='route_front', on_delete=models.CASCADE)
-    back = models.ForeignKey(Line, verbose_name=_('volta'), related_name='route_back', on_delete=models.CASCADE)
-    city = models.ForeignKey(City, verbose_name=_('cidade'), on_delete=models.CASCADE)
-    user = models.ForeignKey(User, verbose_name=_('administrador'), on_delete=models.CASCADE)
+    front = models.ForeignKey(Line, verbose_name=_(
+        'ida'), related_name='route_front', on_delete=models.CASCADE)
+    back = models.ForeignKey(Line, verbose_name=_(
+        'volta'), related_name='route_back', on_delete=models.CASCADE)
+    city = models.ForeignKey(City, verbose_name=_(
+        'cidade'), on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name=_(
+        'administrador'), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _('rota')

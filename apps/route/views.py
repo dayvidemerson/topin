@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
 from .serializers import MarkerSerializer, LineSerializer, RouteSerializer
-from .filters import MarkerFilter, RouteFilter
+from .filters import MarkerFilter, LineFilter, RouteFilter
 from .models import Marker, Line, Route
 
 
@@ -16,6 +16,8 @@ class MarkerViewSet(viewsets.ReadOnlyModelViewSet):
 class LineViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Line.objects.all()
     serializer_class = LineSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_class = LineFilter
 
 
 class RouteViewSet(viewsets.ReadOnlyModelViewSet):
