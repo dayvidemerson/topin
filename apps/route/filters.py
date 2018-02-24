@@ -4,7 +4,7 @@ from .models import Marker, Line, Schedule, Route
 
 
 class MarkerFilter(django_filters.FilterSet):
-    city = django_filters.CharFilter(name='city__slug')
+    city = django_filters.CharFilter(name='city', lookup_expr='slug')
 
     class Meta:
         model = Marker
@@ -12,7 +12,7 @@ class MarkerFilter(django_filters.FilterSet):
 
 
 class LineFilter(django_filters.FilterSet):
-    city = django_filters.CharFilter(name='city__slug')
+    city = django_filters.CharFilter(name='city', lookup_expr='slug')
 
     class Meta:
         model = Line
@@ -20,8 +20,9 @@ class LineFilter(django_filters.FilterSet):
 
 
 class ScheduleFilter(django_filters.FilterSet):
-    line = django_filters.CharFilter(name='line__slug')
-    weekdays = django_filters.CharFilter(name='weekdays__in')
+    line = django_filters.CharFilter(name='line', lookup_expr='slug')
+    weekdays = django_filters.CharFilter(
+        name='weekdays', lookup_expr='contains')
 
     class Meta:
         model = Schedule
@@ -29,7 +30,7 @@ class ScheduleFilter(django_filters.FilterSet):
 
 
 class RouteFilter(django_filters.FilterSet):
-    city = django_filters.CharFilter(name='city__slug')
+    city = django_filters.CharFilter(name='city', lookup_expr='slug')
 
     class Meta:
         model = Route
