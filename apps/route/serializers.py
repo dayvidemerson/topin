@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Marker, PointLine, Line, Route
+from .models import Marker, PointLine, Line, Schedule, Route
 
 
 class MarkerSerializer(serializers.ModelSerializer):
@@ -21,12 +21,20 @@ class PointLineSerializer(serializers.ModelSerializer):
 
 class LineSerializer(serializers.ModelSerializer):
 
-    points = PointLineSerializer(source='pointline_set', many=True, read_only=True)
+    points = PointLineSerializer(
+        source='pointline_set', many=True, read_only=True)
     markers = MarkerSerializer(many=True)
 
     class Meta:
         model = Line
         fields = ['id', 'name', 'slug', 'description', 'markers', 'points']
+
+
+class ScheduleSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Schedule
+        exclude = ['id', 'line', 'hour', 'weekdays']
 
 
 class RouteSerializer(serializers.ModelSerializer):
