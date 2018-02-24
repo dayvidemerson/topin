@@ -34,7 +34,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule
-        exclude = ['id', 'line', 'hour', 'weekdays']
+        fields = ['id', 'line', 'hour', 'weekdays']
 
 
 class RouteSerializer(serializers.ModelSerializer):
