@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Marker, Line, PointLine, Schedule, Route
+from .models import Marker, Line, PointLine, Schedule, Feedback
 
 
 class MarkerAdmin(admin.ModelAdmin):
@@ -22,19 +22,17 @@ class PointLineInline(admin.TabularInline):
 class LineAdmin(admin.ModelAdmin):
     list_display = ['name', 'user']
     search_fields = ['name']
-    list_filter = ['user']
     prepopulated_fields = {'slug': ['name']}
 
     inlines = [ScheduleInline, PointLineInline]
 
 
-class RouteAdmin(admin.ModelAdmin):
-    list_display = ['name', 'city', 'user']
-    search_fields = ['name', 'front__name', 'back__name']
-    list_filter = ['city', 'user']
-    prepopulated_fields = {'slug': ['name']}
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['name', 'reason']
+    search_fields = ['name', 'email', 'contact', 'reason']
+    list_filter = ['created_at']
 
 
 admin.site.register(Marker, MarkerAdmin)
 admin.site.register(Line, LineAdmin)
-admin.site.register(Route, RouteAdmin)
+admin.site.register(Feedback, FeedbackAdmin)

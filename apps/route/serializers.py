@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Marker, PointLine, Line, Schedule, Route
+from .models import Marker, PointLine, Line, Schedule
 
 
 class MarkerSerializer(serializers.ModelSerializer):
@@ -35,12 +35,3 @@ class ScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Schedule
         fields = ['id', 'line', 'hour', 'weekdays']
-
-
-class RouteSerializer(serializers.ModelSerializer):
-
-    city = serializers.SlugRelatedField(slug_field='slug', read_only=True)
-
-    class Meta:
-        model = Route
-        exclude = ['user', 'created_at', 'updated_at']

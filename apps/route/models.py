@@ -104,23 +104,19 @@ class Schedule(Timestamp):
         return '{} - {}'.format(self.line.name, self.hour)
 
 
-class Route(Timestamp):
+class Feedback(Timestamp):
     name = models.CharField(_('nome'), max_length=255)
-    slug = models.SlugField(_('identificador'), unique=True)
-
-    front = models.ForeignKey(Line, verbose_name=_(
-        'ida'), related_name='route_front', on_delete=models.CASCADE)
-    back = models.ForeignKey(Line, verbose_name=_(
-        'volta'), related_name='route_back', on_delete=models.CASCADE)
-    city = models.ForeignKey(City, verbose_name=_(
-        'cidade'), on_delete=models.CASCADE)
+    email = models.EmailField(_('e-mail'))
+    contact = models.CharField(_('contato'), max_length=15)
+    reason = models.CharField(_('motivo'), max_length=255)
+    message = models.TextField(_('mensagem'))
     user = models.ForeignKey(User, verbose_name=_(
         'administrador'), on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _('rota')
-        verbose_name_plural = _('rotas')
-        ordering = ['name']
+        verbose_name = _('feedback')
+        verbose_name_plural = _('feedbacks')
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.name

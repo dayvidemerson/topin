@@ -1,9 +1,9 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import MarkerSerializer, LineSerializer, ScheduleSerializer, RouteSerializer
-from .filters import MarkerFilter, LineFilter, ScheduleFilter, RouteFilter
-from .models import Marker, Line, Schedule, Route
+from .serializers import MarkerSerializer, LineSerializer, ScheduleSerializer
+from .filters import MarkerFilter, LineFilter, ScheduleFilter
+from .models import Marker, Line, Schedule
 
 
 class MarkerViewSet(viewsets.ReadOnlyModelViewSet):
@@ -25,10 +25,3 @@ class ScheduleViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ScheduleSerializer
     filter_backends = [DjangoFilterBackend]
     filter_class = ScheduleFilter
-
-
-class RouteViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Route.objects.all()
-    serializer_class = RouteSerializer
-    filter_backends = [DjangoFilterBackend]
-    filter_class = RouteFilter
